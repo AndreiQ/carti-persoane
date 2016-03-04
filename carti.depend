@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1457103616 source:c:\users\andrei\desktop\school\semestrul ii\programare ii\carti\main.cpp
+	<iostream>
+	<fstream>
+	<stdlib.h>
+	"book.h"
+	"student.h"
+
+1457098288 source:c:\users\andrei\desktop\school\semestrul ii\programare ii\carti\src\book.cpp
+	"book.h"
+	<iostream>
+	<stdlib.h>
+	<cstdlib>
+
+1457097507 c:\users\andrei\desktop\school\semestrul ii\programare ii\carti\include\book.h
+
+1457103307 source:c:\users\andrei\desktop\school\semestrul ii\programare ii\carti\src\student.cpp
+	"student.h"
+	<iostream>
+
+1457097507 c:\users\andrei\desktop\school\semestrul ii\programare ii\carti\include\student.h
+
