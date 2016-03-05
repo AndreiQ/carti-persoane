@@ -50,3 +50,64 @@
 	<iostream>
 	<string.h>
 
+1457176298 source:c:\users\andrei\desktop\carti-persoane-master\main.cpp
+	<iostream>
+	<fstream>
+	<stdlib.h>
+	<string.h>
+	"book.h"
+	"student.h"
+	"imprumut.h"
+
+1457137638 c:\users\andrei\desktop\carti-persoane-master\include\book.h
+
+1457137638 c:\users\andrei\desktop\carti-persoane-master\include\student.h
+
+1457176074 c:\users\andrei\desktop\carti-persoane-master\include\imprumut.h
+
+1457137638 source:c:\users\andrei\desktop\carti-persoane-master\src\book.cpp
+	"book.h"
+	<iostream>
+	<stdlib.h>
+	<cstdlib>
+
+1457176074 source:c:\users\andrei\desktop\carti-persoane-master\src\imprumut.cpp
+	"imprumut.h"
+	<iostream>
+	<string.h>
+
+1457137638 source:c:\users\andrei\desktop\carti-persoane-master\src\student.cpp
+	"student.h"
+	<iostream>
+
+1457177923 source:c:\users\andrei\desktop\school\semestrul ii\stagiu practica\carti-persoane-master\src\book.cpp
+	"book.h"
+	<iostream>
+	<stdlib.h>
+	<cstdlib>
+
+1457137638 c:\users\andrei\desktop\school\semestrul ii\stagiu practica\carti-persoane-master\include\book.h
+
+1457176074 source:c:\users\andrei\desktop\school\semestrul ii\stagiu practica\carti-persoane-master\src\imprumut.cpp
+	"imprumut.h"
+	<iostream>
+	<string.h>
+
+1457176074 c:\users\andrei\desktop\school\semestrul ii\stagiu practica\carti-persoane-master\include\imprumut.h
+
+1457137638 source:c:\users\andrei\desktop\school\semestrul ii\stagiu practica\carti-persoane-master\src\student.cpp
+	"student.h"
+	<iostream>
+
+1457137638 c:\users\andrei\desktop\school\semestrul ii\stagiu practica\carti-persoane-master\include\student.h
+
+1457181856 source:c:\users\andrei\desktop\school\semestrul ii\stagiu practica\carti-persoane-master\main.cpp
+	<iostream>
+	<fstream>
+	<String.h>
+	<stdlib.h>
+	<string.h>
+	"book.h"
+	"student.h"
+	"imprumut.h"
+

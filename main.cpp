@@ -1,5 +1,6 @@
 #include <iostream>
 #include<fstream>
+#include<String.h>
 #include <stdlib.h>
 #include <string.h>
 //#include <SFML/Graphics.hpp>
@@ -14,12 +15,16 @@ fstream books,pers,impr;
 book bk;
 student st;
 imprumut imprum;
-inline bool checkIfFileExists(const std::string& fileName){
+inline bool checkIfFileExists(const std::string& fileName)
+{
     ifstream file(fileName.c_str());
-    if (file.good()) {
+    if (file.good())
+    {
         file.close();
         return true;
-    } else {
+    }
+    else
+    {
         file.close();
         return false;
     }
@@ -28,21 +33,21 @@ void initializare()
 {
     if(!checkIfFileExists("persoane.bin"))
     {
-    ofstream auxiliarFile;
-    auxiliarFile.open("persoane.bin");
-    auxiliarFile.close();
+        ofstream auxiliarFile;
+        auxiliarFile.open("persoane.bin");
+        auxiliarFile.close();
     }
     if(!checkIfFileExists("carti.bin"))
     {
-    ofstream auxiliarFile;
-    auxiliarFile.open("carti.bin");
-    auxiliarFile.close();
+        ofstream auxiliarFile;
+        auxiliarFile.open("carti.bin");
+        auxiliarFile.close();
     }
     if(!checkIfFileExists("imprumut.bin"))
     {
-    ofstream auxiliarFile;
-    auxiliarFile.open("imprumut.bin");
-    auxiliarFile.close();
+        ofstream auxiliarFile;
+        auxiliarFile.open("imprumut.bin");
+        auxiliarFile.close();
     }
 }
 void TITLU()
@@ -140,7 +145,7 @@ bool existaNumeleCartii(char bookName[30])
 int imprumut_nou()
 {
     char studentName[30],bookName[30];
-    impr.open("imprumut.bin",ios::out|ios::binary);
+    impr.open("imprumut.bin",ios::out|ios::app|ios::binary);
     cout<<"Introdu numele persoanei care imprumuta :";
     cin.get(studentName,30);
     cin.get();
@@ -171,17 +176,56 @@ void afisare_imprum()
         imprum.show_imprumut();
     impr.close();
 }
+int data_pers()
+{
+    char studentName[30];
+    cout<<"Introdu numele persoanei :";
+    cin.get(studentName,30);
+    cin.get();
+    if(!existaNumelePersoanei(studentName))
+    {
+        cout<<"Aceasta persoana nu exista\n";
+        return 0;
+    }
+    cout<<"Carti imprumutate:\n";
+    impr.open("imprumut.bin",ios::in|ios::binary);
+    while(impr.read((char*)&imprum,sizeof(imprumut)))
+        if(strcmp(imprum.studentName,studentName)==0)
+            cout<<imprum.bookName<<endl;
+    impr.close();
+    return 1;
+}
+int data_carte()
+{
+    char bookName[30];
+    cout<<"Introdu numele cartii :";
+    cin.get(bookName,30);
+    cin.get();
+    if(!existaNumeleCartii(bookName))
+    {
+        cout<<"Aceasta carte nu exista\n";
+        return 0;
+    }
+    cout<<"Persoane care au imprumutat cartea:\n";
+    impr.open("imprumut.bin",ios::in|ios::binary);
+    while(impr.read((char*)&imprum,sizeof(imprumut)))
+        if(strcmp(imprum.bookName,bookName)==0)
+            cout<<imprum.studentName<<endl;
+    impr.close();
+    return 1;
+}
 void afisare_meniu()
 {
     cout<<"Ce doriti sa faceti?"<<endl;
     cout<<"\n0 Iesire"<<endl;
     cout<<"1 Adauga carte noua"<<endl;
     cout<<"2 Adauga persoana noua"<<endl;
-    cout<<"3 Vezi cine a imprumutat cartea"<<endl;
+    cout<<"3 Afiseaza lista imprumuturilor"<<endl;
     cout<<"4 Vezi date persoana"<<endl;
-    cout<<"5 Adauga imprumut nou"<<endl;
-    cout<<"6 Afiseaza toate cartile"<<endl;
-    cout<<"7 Afiseaza toate persoanele"<<endl;
+    cout<<"5 Vezi date carte"<<endl;
+    cout<<"6 Adauga imprumut nou"<<endl;
+    cout<<"7 Afiseaza toate cartile"<<endl;
+    cout<<"8 Afiseaza toate persoanele"<<endl;
 }
 
 void meniu()
@@ -196,29 +240,25 @@ void meniu()
         TITLU();
         switch(rasp)
         {
-        case 0:
-            exit(0);
+        case 0: exit(0);
             break;
-        case 1:
-            add_book();
+        case 1: add_book();
             break;
-        case 2:
-            add_pers();
+        case 2: add_pers();
             break;
-        /*case 3: list_imprumut();
-         break;
-         case 4: data_pers();
-         break;*/
-         case 5: imprumut_nou();
-         break;
-        case 6:
-            afisare_carti();
+        case 3: afisare_imprum();
             break;
-        case 7:
-            afisare_pers();
+        case 4: data_pers();
             break;
-        default:
-            cout<<"Optiune gresita.";
+        case 5: data_carte();
+            break;
+        case 6: imprumut_nou();
+            break;
+        case 7: afisare_carti();
+            break;
+        case 8: afisare_pers();
+            break;
+        default: cout<<"Optiune gresita.";
             break;
         };
     }
