@@ -20,3 +20,33 @@
 
 1457097507 c:\users\andrei\desktop\school\semestrul ii\programare ii\carti\include\student.h
 
+1457173192 source:c:\users\cristi\desktop\updatemain\main.cpp
+	<iostream>
+	<fstream>
+	<stdlib.h>
+	<string.h>
+	"book.h"
+	"student.h"
+	"imprumut.h"
+
+1457173031 c:\users\cristi\desktop\updatemain\include\book.h
+
+1457172523 c:\users\cristi\desktop\updatemain\include\student.h
+
+1457121023 source:c:\users\cristi\desktop\updatemain\src\book.cpp
+	"book.h"
+	<iostream>
+	<stdlib.h>
+	<cstdlib>
+
+1457172166 source:c:\users\cristi\desktop\updatemain\src\student.cpp
+	"student.h"
+	<iostream>
+
+1457167044 c:\users\cristi\desktop\updatemain\include\imprumut.h
+
+1457167299 source:c:\users\cristi\desktop\updatemain\src\imprumut.cpp
+	"imprumut.h"
+	<iostream>
+	<string.h>
+

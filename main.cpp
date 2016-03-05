@@ -1,16 +1,50 @@
 #include <iostream>
 #include<fstream>
 #include <stdlib.h>
+#include <string.h>
 //#include <SFML/Graphics.hpp>
 //#include <SFML/Window.hpp>
 //#include <SFML/System.hpp>
 #include "book.h"
 #include "student.h"
+#include "imprumut.h"
 using namespace std;
 
-fstream books,pers;
+fstream books,pers,impr;
 book bk;
 student st;
+imprumut imprum;
+inline bool checkIfFileExists(const std::string& fileName){
+    ifstream file(fileName.c_str());
+    if (file.good()) {
+        file.close();
+        return true;
+    } else {
+        file.close();
+        return false;
+    }
+}
+void initializare()
+{
+    if(!checkIfFileExists("persoane.bin"))
+    {
+    ofstream auxiliarFile;
+    auxiliarFile.open("persoane.bin");
+    auxiliarFile.close();
+    }
+    if(!checkIfFileExists("carti.bin"))
+    {
+    ofstream auxiliarFile;
+    auxiliarFile.open("carti.bin");
+    auxiliarFile.close();
+    }
+    if(!checkIfFileExists("imprumut.bin"))
+    {
+    ofstream auxiliarFile;
+    auxiliarFile.open("imprumut.bin");
+    auxiliarFile.close();
+    }
+}
 void TITLU()
 {
     cout<<"\t\t\t\t\t\t--------------\n";
@@ -69,6 +103,63 @@ void afisare_pers()
         st.show_student();
     pers.close();
 }
+bool existaNumelePersoanei(char studentName[30])
+{
+    pers.open("persoane.bin",ios::in|ios::binary);
+    pers.clear();
+    pers.seekg(0);
+    while(pers.read((char*)&st,sizeof(student)))
+    {
+        if(strcmp(st.studentName,studentName)==0)
+        {
+            pers.close();
+            return true;
+        }
+    }
+    pers.close();
+    return false;
+}
+
+bool existaNumeleCartii(char bookName[30])
+{
+    books.open("carti.bin",ios::in|ios::binary);
+    books.clear();
+    books.seekg(0);
+    while(books.read((char*)&bk,sizeof(book)))
+    {
+        if(strcmp(bk.bName,bookName)==0)
+        {
+            books.close();
+            return true;
+        }
+    }
+    books.close();
+    return false;
+}
+
+int imprumut_nou()
+{
+    char studentName[30],bookName[30];
+    impr.open("imprumut.bin",ios::out|ios::binary);
+    cout<<"Introdu numele persoanei care imprumuta :";
+    cin>>studentName;
+    cin.get();
+    if(!existaNumelePersoanei(studentName))
+    {
+        cout<<"Aceasta persoana nu exista\n";
+        return 0;
+    }
+    cout<<"Introdu numele cartii :";
+    cin>>bookName;
+    if(!existaNumeleCartii(bookName))
+    {
+        cout<<"Aceasta carte nu exista\n";
+        return 0;
+    }
+    imprum.creazaImprumut(studentName,bookName);
+    impr.write((char*)&impr,sizeof(imprum));
+    impr.close();
+}
 void afisare_meniu()
 {
     cout<<"Ce doriti sa faceti?"<<endl;
@@ -103,12 +194,12 @@ void meniu()
         case 2:
             add_pers();
             break;
-        /* case 3: list_imprumut();
+        /*case 3: list_imprumut();
          break;
          case 4: data_pers();
-         break;
-         case 5: imprumut_nou();
          break;*/
+         case 5: imprumut_nou();
+         break;
         case 6:
             afisare_carti();
             break;
@@ -124,6 +215,7 @@ void meniu()
 }
 int main()
 {
+    initializare();
     meniu();
     return 0;
 }

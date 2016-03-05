@@ -5,11 +5,12 @@
 class book
 {
 private:
-    char bName[30];
     //char bookNr[3];
-    char aName[30];
+
     bool isBorrowed=false;
 public:
+    char aName[30];
+    char bName[30];
     book();
     void create_book();
     void show_book();
