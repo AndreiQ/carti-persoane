@@ -158,7 +158,17 @@ int imprumut_nou()
         return 0;
     }
     imprum.creazaImprumut(studentName,bookName);
-    impr.write((char*)&impr,sizeof(imprum));
+    impr.write((char*)&imprum,sizeof(imprumut));
+    impr.close();
+    return 1;
+}
+void afisare_imprum()
+{
+    impr.open("imprumut.bin",ios::in|ios::binary);
+    impr.clear();
+    impr.seekg(0);  //set pozitie la inceputul fisierului
+    while(impr.read((char*)&imprum,sizeof(imprumut)))
+        imprum.show_imprumut();
     impr.close();
 }
 void afisare_meniu()
