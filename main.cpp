@@ -142,7 +142,7 @@ int imprumut_nou()
     char studentName[30],bookName[30];
     impr.open("imprumut.bin",ios::out|ios::binary);
     cout<<"Introdu numele persoanei care imprumuta :";
-    cin>>studentName;
+    cin.get(studentName,30);
     cin.get();
     if(!existaNumelePersoanei(studentName))
     {
@@ -150,7 +150,8 @@ int imprumut_nou()
         return 0;
     }
     cout<<"Introdu numele cartii :";
-    cin>>bookName;
+    cin.get(bookName,30);
+    cin.get();
     if(!existaNumeleCartii(bookName))
     {
         cout<<"Aceasta carte nu exista\n";
