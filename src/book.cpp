@@ -16,6 +16,6 @@ void book::create_book()
 }
 void book::show_book()
 {
-    cout<<bName<<" ";
+    cout<<bName<<" - ";
     cout<<aName<<endl;
 }
