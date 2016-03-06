@@ -80,13 +80,13 @@
 	"student.h"
 	<iostream>
 
-1457177923 source:c:\users\andrei\desktop\school\semestrul ii\stagiu practica\carti-persoane-master\src\book.cpp
+1457184402 source:c:\users\andrei\desktop\school\semestrul ii\stagiu practica\carti-persoane-master\src\book.cpp
 	"book.h"
 	<iostream>
 	<stdlib.h>
 	<cstdlib>
 
-1457137638 c:\users\andrei\desktop\school\semestrul ii\stagiu practica\carti-persoane-master\include\book.h
+1457185241 c:\users\andrei\desktop\school\semestrul ii\stagiu practica\carti-persoane-master\include\book.h
 
 1457176074 source:c:\users\andrei\desktop\school\semestrul ii\stagiu practica\carti-persoane-master\src\imprumut.cpp
 	"imprumut.h"
@@ -101,13 +101,23 @@
 
 1457137638 c:\users\andrei\desktop\school\semestrul ii\stagiu practica\carti-persoane-master\include\student.h
 
-1457181856 source:c:\users\andrei\desktop\school\semestrul ii\stagiu practica\carti-persoane-master\main.cpp
+1457219852 source:c:\users\andrei\desktop\school\semestrul ii\stagiu practica\carti-persoane-master\main.cpp
 	<iostream>
 	<fstream>
 	<String.h>
 	<stdlib.h>
 	<string.h>
+	<SFML/Graphics.hpp>
+	<SFML/Window.hpp>
+	<SFML/System.hpp>
 	"book.h"
 	"student.h"
 	"imprumut.h"
+	"Meniu.h"
+
+1457220079 c:\users\andrei\desktop\school\semestrul ii\stagiu practica\carti-persoane-master\include\meniu.h
+	<SFML/Graphics.hpp>
+
+1457220079 source:c:\users\andrei\desktop\school\semestrul ii\stagiu practica\carti-persoane-master\src\meniu.cpp
+	"Meniu.h"
 

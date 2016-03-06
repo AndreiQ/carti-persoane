@@ -34,10 +34,12 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/Meniu.h" />
 		<Unit filename="include/book.h" />
 		<Unit filename="include/imprumut.h" />
 		<Unit filename="include/student.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Meniu.cpp" />
 		<Unit filename="src/book.cpp" />
 		<Unit filename="src/imprumut.cpp" />
 		<Unit filename="src/student.cpp" />

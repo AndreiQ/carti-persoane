@@ -3,19 +3,19 @@
 #include<String.h>
 #include <stdlib.h>
 #include <string.h>
-//#include <SFML/Graphics.hpp>
-//#include <SFML/Window.hpp>
-//#include <SFML/System.hpp>
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/System.hpp>
 #include "book.h"
 #include "student.h"
 #include "imprumut.h"
+#include "Meniu.h"
 using namespace std;
-
 fstream books,pers,impr;
 book bk;
 student st;
 imprumut imprum;
-inline bool checkIfFileExists(const std::string& fileName)
+inline bool checkIfFileExists(const string& fileName)
 {
     ifstream file(fileName.c_str());
     if (file.good())
@@ -75,11 +75,15 @@ void add_book()
 }
 void afisare_carti()
 {
+    int ID=1;
     books.open("carti.bin",ios::in|ios::binary);
     books.clear();
     books.seekg(0);  //set pozitie la inceputul fisierului
     while(books.read((char*)&bk,sizeof(book)))
+    {
+        cout<<ID++<<". " ;
         bk.show_book();
+    }
     books.close();
 }
 void add_pers()
@@ -101,11 +105,15 @@ void add_pers()
 }
 void afisare_pers()
 {
+    int ID=1;
     pers.open("persoane.bin",ios::in|ios::binary);
     pers.clear();
     pers.seekg(0);  //set pozitie la inceputul fisierului
     while(pers.read((char*)&st,sizeof(student)))
-        st.show_student();
+        {
+            cout<<ID++<<". " ;
+            st.show_student();
+        }
     pers.close();
 }
 bool existaNumelePersoanei(char studentName[30])
@@ -267,6 +275,74 @@ void meniu()
 int main()
 {
     initializare();
-    meniu();
+   int textFont=28;
+    std::vector<sf::Text> op;
+    sf::Font font;
+    if (!font.loadFromFile("orange juice 2.0.ttf"))
+        return EXIT_FAILURE;
+    sf::Text text("Biblioteca", font, 45);
+   /* sf::Text op0("0. Iesire",font,textFont);
+    sf::Text op1("1. Adauga carte noua",font,textFont);
+    sf::Text op2("2. Adauga persoana noua",font,textFont);
+    sf::Text op3("3. Afisare lista imprumuturi",font,textFont);
+    sf::Text op4("4. Vezi date persoana",font,textFont);
+    sf::Text op5("5. Vezi date carte",font,textFont);
+    sf::Text op6("6. Adauga imprumut nou",font,textFont);
+    sf::Text op7("7. Afiseaza toate cartile",font,textFont);
+    sf::Text op8("8. Afiseaza toate persoanele",font,textFont);
+    op.push_back(op0);op.push_back(op1);op.push_back(op2);op.push_back(op3);op.push_back(op4);op.push_back(op5);op.push_back(op6);op.push_back(op7);op.push_back(op8);
+   */ sf::RenderWindow window(sf::VideoMode(640,640),"Library");
+    text.setPosition(window.getSize().y/3,2);
+    text.setColor(sf::Color::Red);
+    sf::Thread meniu_consola(&meniu);
+     // run it
+    meniu_consola.launch();
+
+    //DEFINE MENU
+    class Meniu menu(window.getSize().x, window.getSize().y);
+
+    // run the program as long as the window is open
+    while(window.isOpen())
+    {
+        // check all the window's events that were triggered since the last iteration of the loop
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            switch(event.type)
+            {
+            case sf::Event::Closed:
+                window.close();
+                break;
+            case sf::Event::KeyReleased:
+                switch (event.key.code)
+                {
+                case sf::Keyboard::Up:
+                    menu.moveUp();
+                    break;
+                case sf::Keyboard::Down:
+                    menu.moveDown();
+                    break;
+                case sf::Keyboard::Return:
+                    switch(menu.getPressedItem())
+                    {// aici facem ca optiunile alese sa fie afisate in consola******************
+                    case 0:
+                        return 0;
+                        break;
+                    //case 1:
+
+                    case 2:
+                        window.close();
+                        break;
+                    }
+                    break;
+                    }
+                break;
+                }
+        }
+        window.clear();
+        window.draw(text);
+        menu.draw(window);
+        window.display();
+    }
     return 0;
 }
