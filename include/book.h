@@ -6,7 +6,7 @@ class book
 {
 private:
     //char bookNr[3];
-
+    //int ID=0;
     bool isBorrowed=false;
 public:
     char aName[30];
