@@ -222,7 +222,7 @@ int data_carte()
     impr.close();
     return 1;
 }
-void afisare_meniu()
+/*void afisare_meniu()
 {
     cout<<"Ce doriti sa faceti?"<<endl;
     cout<<"\n0 Iesire"<<endl;
@@ -234,7 +234,7 @@ void afisare_meniu()
     cout<<"6 Adauga imprumut nou"<<endl;
     cout<<"7 Afiseaza toate cartile"<<endl;
     cout<<"8 Afiseaza toate persoanele"<<endl;
-}
+}*/
 
 void meniu()
 {
@@ -242,7 +242,7 @@ void meniu()
     int rasp;
     do
     {
-        afisare_meniu();
+//        afisare_meniu();
         cin>>rasp; cin.get();
         system("cls");
         TITLU();
@@ -281,17 +281,7 @@ int main()
     if (!font.loadFromFile("orange juice 2.0.ttf"))
         return EXIT_FAILURE;
     sf::Text text("Biblioteca", font, 45);
-   /* sf::Text op0("0. Iesire",font,textFont);
-    sf::Text op1("1. Adauga carte noua",font,textFont);
-    sf::Text op2("2. Adauga persoana noua",font,textFont);
-    sf::Text op3("3. Afisare lista imprumuturi",font,textFont);
-    sf::Text op4("4. Vezi date persoana",font,textFont);
-    sf::Text op5("5. Vezi date carte",font,textFont);
-    sf::Text op6("6. Adauga imprumut nou",font,textFont);
-    sf::Text op7("7. Afiseaza toate cartile",font,textFont);
-    sf::Text op8("8. Afiseaza toate persoanele",font,textFont);
-    op.push_back(op0);op.push_back(op1);op.push_back(op2);op.push_back(op3);op.push_back(op4);op.push_back(op5);op.push_back(op6);op.push_back(op7);op.push_back(op8);
-   */ sf::RenderWindow window(sf::VideoMode(640,640),"Library");
+    sf::RenderWindow window(sf::VideoMode(640,640),"Library");
     text.setPosition(window.getSize().y/3,2);
     text.setColor(sf::Color::Red);
     sf::Thread meniu_consola(&meniu);
@@ -328,10 +318,23 @@ int main()
                     case 0:
                         return 0;
                         break;
-                    //case 1:
-
-                    case 2:
-                        window.close();
+                    case 1:add_book();
+                        break;
+                    case 2:add_pers();
+                        break;
+                    case 3:afisare_imprum();
+                        break;
+                    case 4:data_pers();
+                        break;
+                    case 5:data_carte();
+                        break;
+                    case 6:imprumut_nou();
+                        break;
+                    case 7:afisare_carti();
+                        break;
+                    case 8:afisare_pers();
+                        break;
+                     default:   //window.close();
                         break;
                     }
                     break;
