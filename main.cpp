@@ -50,25 +50,18 @@ void initializare()
         auxiliarFile.close();
     }
 }
-void TITLU()
-{
-    cout<<"\t\t\t\t\t\t--------------\n";
-    cout<<"\t\t\t\t\t\t| Biblioteca |\n";
-    cout<<"\t\t\t\t\t\t--------------\n\n";
-}
 void add_book()
 {
     char ch;
     books.open("carti.bin",ios::out|ios::app|ios::binary);
     do
     {
-        system("cls");
-        TITLU();
         bk.create_book();
         books.write((char*)&bk,sizeof(book));
         cout<<"\nVrei sa mai adaugi carti?(y/n?)";
         cin>>ch;
         cin.get();
+        system("cls");
     }
     while(ch=='y'||ch=='Y');
     books.close();
@@ -92,13 +85,12 @@ void add_pers()
     pers.open("persoane.bin",ios::out|ios::app|ios::binary);
     do
     {
-        system("cls");
-        TITLU();
         st.create_student();
         pers.write((char*)&st,sizeof(student));
         cout<<"\nVrei sa mai adaugi persoane?(y/n?)";
         cin>>ch;
         cin.get();
+        system("cls");
     }
     while(ch=='y'||ch=='Y');
     pers.close();
@@ -110,10 +102,10 @@ void afisare_pers()
     pers.clear();
     pers.seekg(0);  //set pozitie la inceputul fisierului
     while(pers.read((char*)&st,sizeof(student)))
-        {
-            cout<<ID++<<". " ;
-            st.show_student();
-        }
+    {
+        cout<<ID++<<". " ;
+        st.show_student();
+    }
     pers.close();
 }
 bool existaNumelePersoanei(char studentName[30])
@@ -222,61 +214,10 @@ int data_carte()
     impr.close();
     return 1;
 }
-/*void afisare_meniu()
-{
-    cout<<"Ce doriti sa faceti?"<<endl;
-    cout<<"\n0 Iesire"<<endl;
-    cout<<"1 Adauga carte noua"<<endl;
-    cout<<"2 Adauga persoana noua"<<endl;
-    cout<<"3 Afiseaza lista imprumuturilor"<<endl;
-    cout<<"4 Vezi date persoana"<<endl;
-    cout<<"5 Vezi date carte"<<endl;
-    cout<<"6 Adauga imprumut nou"<<endl;
-    cout<<"7 Afiseaza toate cartile"<<endl;
-    cout<<"8 Afiseaza toate persoanele"<<endl;
-}*/
 
-void meniu()
-{
-    TITLU();
-    int rasp;
-    do
-    {
-//        afisare_meniu();
-        cin>>rasp; cin.get();
-        system("cls");
-        TITLU();
-        switch(rasp)
-        {
-        case 0: exit(0);
-            break;
-        case 1: add_book();
-            break;
-        case 2: add_pers();
-            break;
-        case 3: afisare_imprum();
-            break;
-        case 4: data_pers();
-            break;
-        case 5: data_carte();
-            break;
-        case 6: imprumut_nou();
-            break;
-        case 7: afisare_carti();
-            break;
-        case 8: afisare_pers();
-            break;
-        default: cout<<"Optiune gresita.";
-            break;
-        };
-    }
-    while(true);
-}
 int main()
 {
     initializare();
-   int textFont=28;
-    std::vector<sf::Text> op;
     sf::Font font;
     if (!font.loadFromFile("orange juice 2.0.ttf"))
         return EXIT_FAILURE;
@@ -284,9 +225,6 @@ int main()
     sf::RenderWindow window(sf::VideoMode(640,640),"Library");
     text.setPosition(window.getSize().y/3,2);
     text.setColor(sf::Color::Red);
-    sf::Thread meniu_consola(&meniu);
-     // run it
-    meniu_consola.launch();
 
     //DEFINE MENU
     class Meniu menu(window.getSize().x, window.getSize().y);
@@ -313,34 +251,47 @@ int main()
                     menu.moveDown();
                     break;
                 case sf::Keyboard::Return:
+                {
+                    system("cls");
                     switch(menu.getPressedItem())
-                    {// aici facem ca optiunile alese sa fie afisate in consola******************
+                    {
+                    // aici facem ca optiunile alese sa fie afisate in consola******************
                     case 0:
                         return 0;
                         break;
-                    case 1:add_book();
+                    case 1:
+                        add_book();
+                        //window.setActive(false);
                         break;
-                    case 2:add_pers();
+                    case 2:
+                        add_pers();
                         break;
-                    case 3:afisare_imprum();
+                    case 3:
+                        afisare_imprum();
                         break;
-                    case 4:data_pers();
+                    case 4:
+                        data_pers();
                         break;
-                    case 5:data_carte();
+                    case 5:
+                        data_carte();
                         break;
-                    case 6:imprumut_nou();
+                    case 6:
+                        imprumut_nou();
                         break;
-                    case 7:afisare_carti();
+                    case 7:
+                        afisare_carti();
                         break;
-                    case 8:afisare_pers();
+                    case 8:
+                        afisare_pers();
                         break;
-                     default:   //window.close();
+                    default:
                         break;
                     }
                     break;
-                    }
-                break;
                 }
+                }
+                break;
+            }
         }
         window.clear();
         window.draw(text);
