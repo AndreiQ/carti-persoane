@@ -10,9 +10,7 @@ private:
 //    std::vector<std::string> borrowedBooks;
 public:
     char studentName[30];
-    student();
-    void create_student();
-    void show_student();
+    void create_student(char numeStudent[]);
 };
 
 #endif // STUDENT_H

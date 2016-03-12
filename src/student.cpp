@@ -1,17 +1,8 @@
 #include "student.h"
 #include<iostream>
+#include<string.h>
 using namespace std;
-student::student()
+void student::create_student(char numeStudent[30])
 {
-    //ctor
-}
-void student::create_student()
-{
-    cout<<"Numele persoanei: ";
-    cin.get(studentName,30);cin.get();
-}
-void student::show_student()
-
-{
-    cout<<studentName<<endl;
+    strcpy(studentName,numeStudent);
 }

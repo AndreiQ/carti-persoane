@@ -162,39 +162,43 @@
 	"student.h"
 	<iostream>
 
-1457184402 source:c:\users\cristi\desktop\carti-persoane-master - copy\src\book.cpp
+1457816474 source:c:\users\cristi\desktop\carti-persoane-master - copy\src\book.cpp
 	"book.h"
 	<iostream>
 	<stdlib.h>
 	<cstdlib>
+	<string.h>
 
-1457185241 c:\users\cristi\desktop\carti-persoane-master - copy\include\book.h
+1457816509 c:\users\cristi\desktop\carti-persoane-master - copy\include\book.h
 
-1457176074 source:c:\users\cristi\desktop\carti-persoane-master - copy\src\imprumut.cpp
+1457818115 source:c:\users\cristi\desktop\carti-persoane-master - copy\src\imprumut.cpp
 	"imprumut.h"
 	<iostream>
 	<string.h>
 
-1457176074 c:\users\cristi\desktop\carti-persoane-master - copy\include\imprumut.h
+1457818118 c:\users\cristi\desktop\carti-persoane-master - copy\include\imprumut.h
 
-1457798730 source:c:\users\cristi\desktop\carti-persoane-master - copy\src\meniu.cpp
+1457817451 source:c:\users\cristi\desktop\carti-persoane-master - copy\src\meniu.cpp
 	"Meniu.h"
 
 1457798637 c:\users\cristi\desktop\carti-persoane-master - copy\include\meniu.h
 	<SFML/Graphics.hpp>
 
-1457137638 source:c:\users\cristi\desktop\carti-persoane-master - copy\src\student.cpp
+1457817131 source:c:\users\cristi\desktop\carti-persoane-master - copy\src\student.cpp
 	"student.h"
 	<iostream>
+	<string.h>
 
-1457137638 c:\users\cristi\desktop\carti-persoane-master - copy\include\student.h
+1457816995 c:\users\cristi\desktop\carti-persoane-master - copy\include\student.h
 
-1457799684 source:c:\users\cristi\desktop\carti-persoane-master - copy\main.cpp
+1457819557 source:c:\users\cristi\desktop\carti-persoane-master - copy\main.cpp
 	<iostream>
 	<fstream>
 	<String.h>
 	<stdlib.h>
 	<string.h>
+	<string>
+	<sstream>
 	<SFML/Graphics.hpp>
 	<SFML/Window.hpp>
 	<SFML/System.hpp>

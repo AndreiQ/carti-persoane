@@ -2,20 +2,10 @@
 #include<iostream>
 #include <stdlib.h>
 #include <cstdlib>
+#include <string.h>
 using namespace std;
-book::book()
+void book::create_book(char numeAutor[],char numeCarte[])
 {
-
-}
-void book::create_book()
-{
-    cout<<"Numele cartii: ";
-    cin.get(bName,30);cin.get();
-    cout<<"Numele autorului: ";
-    cin.get(aName,30);cin.get();
-}
-void book::show_book()
-{
-    cout<<bName<<" - ";
-    cout<<aName<<endl;
+    strcpy(aName,numeAutor);
+    strcpy(bName,numeCarte);
 }

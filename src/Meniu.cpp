@@ -76,24 +76,22 @@ void Meniu::afiseazaMeniulPrincipal(sf::RenderWindow &window)
 }
 void Meniu::afiseazaMeniulCartilor(sf::RenderWindow &window)
 {
-numarulDeElementeDinMeniulActual = 3;
-int numarulDeOperatiiPentruCarti=3;
+numarulDeElementeDinMeniulActual = 2;
+int numarulDeOperatiiPentruCarti=2;
 for(int i = 0; i < numarulDeOperatiiPentruCarti; i++)
         window.draw(meniu[i]);
 meniu[0].setString("0. Carte noua");
 meniu[1].setString("1. Lista carti");
-meniu[2].setString("2. Date despre carte");
 }
 
 void Meniu::afiseazaMeniulPersoanelor(sf::RenderWindow &window)
 {
-numarulDeElementeDinMeniulActual = 3;
-int numarulDeOperatiiPentruPersoane=3;
+numarulDeElementeDinMeniulActual = 2;
+int numarulDeOperatiiPentruPersoane=2;
 for(int i = 0; i < numarulDeOperatiiPentruPersoane; i++)
         window.draw(meniu[i]);
 meniu[0].setString("0. Persoana noua");
 meniu[1].setString("1. Lista persoane");
-meniu[2].setString("2. Date despre persoane");
 
 }
 void Meniu::afiseazaMeniulImprumuturilor(sf::RenderWindow &window)

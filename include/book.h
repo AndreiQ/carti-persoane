@@ -5,16 +5,10 @@
 class book
 {
 private:
-    //char bookNr[3];
-    //int ID=0;
-    bool isBorrowed=false;
 public:
     char aName[30];
     char bName[30];
-    book();
-    void create_book();
-    void show_book();
-    void modify_book();
+    void create_book(char numeAutor[],char numeCarte[]);
 };
 
-#endif // BOOK_H
+#endif
