@@ -1,54 +1,109 @@
 #include "Meniu.h"
 
-Meniu::Meniu(float width, float height)
+Meniu::Meniu(float w,float h)
 {
-    if(!font.loadFromFile("orange juice 2.0.ttf"))
+width = w;
+height = h;
+font.loadFromFile("fondul.ttf");
+numarulDeElementeDinMeniulActual = 4;
+for(int i = 0;i < numarulDeElementeDinMeniulActual;i++)
     {
-        //handle error
+        meniu[i].setCharacterSize(40);
+        meniu[i].setFont(font);
+        meniu[i].setColor(sf::Color::White);
+        meniu[i].setPosition(sf::Vector2f(width/10, height/(numarulDeElementeDinMeniulActual + 1) *(i+1)));
     }
-    for(int i = 0; i < MAX_NUMBER_OF_ITEMS; i++)
-        {   meniu[i].setCharacterSize(30);
-            meniu[i].setFont(font);
-            meniu[i].setColor(sf::Color::White);
-            meniu[i].setPosition(sf::Vector2f(width/10, height/(MAX_NUMBER_OF_ITEMS + 1) * (i+1)));
-        }
-    meniu[0].setColor(sf::Color::Red);
-    meniu[0].setString("0. Iesire");
-    meniu[1].setString("1. Adauga carte noua");
-    meniu[2].setString("2. Adauga persoana noua");
-    meniu[3].setString("3. Afisare lista imprumuturi");
-    meniu[4].setString("4. Vezi date persoana");
-    meniu[5].setString("5. Vezi date carte");
-    meniu[6].setString("6. Adauga imprumut nou");
-    meniu[7].setString("7. Afiseaza toate cartile");
-    meniu[8].setString("8. Afiseaza toate persoanele");
-
-    selectedItemIndex = 0;
-}
-void Meniu::draw(sf::RenderWindow &window)
-{
-    for(int i = 0; i < MAX_NUMBER_OF_ITEMS; i++)
-    {
-        window.draw(meniu[i]);
-    }
+elementulSelectat = 0;
+meniu[elementulSelectat].setColor(sf::Color::Red);
 }
 void Meniu::moveUp()
 {
-    if(selectedItemIndex - 1 >= 0)
+    if(elementulSelectat - 1 >= 0)
     {
-        meniu[selectedItemIndex].setColor(sf::Color::White);
-        selectedItemIndex--;
-        meniu[selectedItemIndex].setColor(sf::Color::Red);
+        meniu[elementulSelectat].setColor(sf::Color::White);
+        elementulSelectat--;
+        meniu[elementulSelectat].setColor(sf::Color::Red);
+    }
+    else
+    {
+        meniu[elementulSelectat].setColor(sf::Color::White);
+        elementulSelectat = numarulDeElementeDinMeniulActual-1;
+        meniu[elementulSelectat].setColor(sf::Color::Red);
     }
 }
 void Meniu::moveDown()
 {
-    if(selectedItemIndex + 1 < MAX_NUMBER_OF_ITEMS)
+    if(elementulSelectat + 1 < numarulDeElementeDinMeniulActual)
     {
-        meniu[selectedItemIndex].setColor(sf::Color::White);
-        selectedItemIndex++;
-        meniu[selectedItemIndex].setColor(sf::Color::Red);
+        meniu[elementulSelectat].setColor(sf::Color::White);
+        elementulSelectat++;
+        meniu[elementulSelectat].setColor(sf::Color::Red);
     }
+    else
+    {
+        meniu[elementulSelectat].setColor(sf::Color::White);
+        elementulSelectat = 0;
+        meniu[elementulSelectat].setColor(sf::Color::Red);
+    }
+}
+void Meniu::seteazaPozitieDeInitiala()
+{
+    elementulSelectat = 0;
+    meniu[elementulSelectat].setColor(sf::Color::Red);
+    for(int i=1;i<maximElementeMeniu;i++)
+        meniu[i].setColor(sf::Color::White);
+}
+void Meniu::afiseazaMeniul(sf::RenderWindow &window,int key)
+{
+    if(key==0)
+        afiseazaMeniulPrincipal(window);
+    if(key==1)
+        afiseazaMeniulCartilor(window);
+    if(key==2)
+        afiseazaMeniulPersoanelor(window);
+    if(key==3)
+        afiseazaMeniulImprumuturilor(window);
+}
+void Meniu::afiseazaMeniulPrincipal(sf::RenderWindow &window)
+{
+    numarulDeElementeDinMeniulActual = 4;
+    for(int i = 0; i < numarulDeElementeDinMeniulActual; i++)
+        window.draw(meniu[i]);
+    meniu[0].setString("0. Iesire");
+    meniu[1].setString("1. Operatii Carti");
+    meniu[2].setString("2. Operatii Persoane");
+    meniu[3].setString("3. Operatii Imprumuturi");
+}
+void Meniu::afiseazaMeniulCartilor(sf::RenderWindow &window)
+{
+numarulDeElementeDinMeniulActual = 3;
+int numarulDeOperatiiPentruCarti=3;
+for(int i = 0; i < numarulDeOperatiiPentruCarti; i++)
+        window.draw(meniu[i]);
+meniu[0].setString("0. Carte noua");
+meniu[1].setString("1. Lista carti");
+meniu[2].setString("2. Date despre carte");
+}
+
+void Meniu::afiseazaMeniulPersoanelor(sf::RenderWindow &window)
+{
+numarulDeElementeDinMeniulActual = 3;
+int numarulDeOperatiiPentruPersoane=3;
+for(int i = 0; i < numarulDeOperatiiPentruPersoane; i++)
+        window.draw(meniu[i]);
+meniu[0].setString("0. Persoana noua");
+meniu[1].setString("1. Lista persoane");
+meniu[2].setString("2. Date despre persoane");
+
+}
+void Meniu::afiseazaMeniulImprumuturilor(sf::RenderWindow &window)
+{
+numarulDeElementeDinMeniulActual = 2;
+int numarulDeOperatiiPentruImprumuturi=2;
+for(int i = 0; i < numarulDeOperatiiPentruImprumuturi; i++)
+        window.draw(meniu[i]);
+meniu[0].setString("0. Imprumut nou");
+meniu[1].setString("1. Lista imprumut");
 }
 
 

@@ -15,8 +15,7 @@ fstream books,pers,impr;
 book bk;
 student st;
 imprumut imprum;
-inline bool checkIfFileExists(const string& fileName)
-{
+inline bool checkIfFileExists(const string& fileName){
     ifstream file(fileName.c_str());
     if (file.good())
     {
@@ -29,31 +28,30 @@ inline bool checkIfFileExists(const string& fileName)
         return false;
     }
 }
-void initializare()
-{
-    if(!checkIfFileExists("persoane.bin"))
+void initializare(){
+    if(!checkIfFileExists("bazaDeDate/persoane.bin"))
     {
         ofstream auxiliarFile;
-        auxiliarFile.open("persoane.bin");
+        auxiliarFile.open("bazaDeDate/persoane.bin");
         auxiliarFile.close();
     }
-    if(!checkIfFileExists("carti.bin"))
+    if(!checkIfFileExists("bazaDeDate/carti.bin"))
     {
         ofstream auxiliarFile;
-        auxiliarFile.open("carti.bin");
+        auxiliarFile.open("bazaDeDate/carti.bin");
         auxiliarFile.close();
     }
-    if(!checkIfFileExists("imprumut.bin"))
+    if(!checkIfFileExists("bazaDeDate/imprumut.bin"))
     {
         ofstream auxiliarFile;
-        auxiliarFile.open("imprumut.bin");
+        auxiliarFile.open("bazaDeDate/imprumut.bin");
         auxiliarFile.close();
     }
 }
-void add_book()
-{
+void add_book(){
     char ch;
     books.open("carti.bin",ios::out|ios::app|ios::binary);
+    system("cls");
     do
     {
         bk.create_book();
@@ -66,12 +64,12 @@ void add_book()
     while(ch=='y'||ch=='Y');
     books.close();
 }
-void afisare_carti()
-{
+void afisare_carti(){
     int ID=1;
     books.open("carti.bin",ios::in|ios::binary);
     books.clear();
-    books.seekg(0);  //set pozitie la inceputul fisierului
+    books.seekg(0);
+    system("cls");
     while(books.read((char*)&bk,sizeof(book)))
     {
         cout<<ID++<<". " ;
@@ -79,10 +77,10 @@ void afisare_carti()
     }
     books.close();
 }
-void add_pers()
-{
+void add_pers(){
     char ch;
     pers.open("persoane.bin",ios::out|ios::app|ios::binary);
+    system("cls");
     do
     {
         st.create_student();
@@ -95,8 +93,7 @@ void add_pers()
     while(ch=='y'||ch=='Y');
     pers.close();
 }
-void afisare_pers()
-{
+void afisare_pers(){
     int ID=1;
     pers.open("persoane.bin",ios::in|ios::binary);
     pers.clear();
@@ -108,8 +105,7 @@ void afisare_pers()
     }
     pers.close();
 }
-bool existaNumelePersoanei(char studentName[30])
-{
+bool existaNumelePersoanei(char studentName[30]){
     pers.open("persoane.bin",ios::in|ios::binary);
     pers.clear();
     pers.seekg(0);
@@ -124,10 +120,8 @@ bool existaNumelePersoanei(char studentName[30])
     pers.close();
     return false;
 }
-
-bool existaNumeleCartii(char bookName[30])
-{
-    books.open("carti.bin",ios::in|ios::binary);
+bool existaNumeleCartii(char bookName[30]){
+    books.open("bazaDeDate/carti.bin",ios::in|ios::binary);
     books.clear();
     books.seekg(0);
     while(books.read((char*)&bk,sizeof(book)))
@@ -141,11 +135,9 @@ bool existaNumeleCartii(char bookName[30])
     books.close();
     return false;
 }
-
-int imprumut_nou()
-{
+int imprumut_nou(){
     char studentName[30],bookName[30];
-    impr.open("imprumut.bin",ios::out|ios::app|ios::binary);
+    impr.open("bazaDeDate/imprumut.bin",ios::out|ios::app|ios::binary);
     cout<<"Introdu numele persoanei care imprumuta :";
     cin.get(studentName,30);
     cin.get();
@@ -167,17 +159,15 @@ int imprumut_nou()
     impr.close();
     return 1;
 }
-void afisare_imprum()
-{
-    impr.open("imprumut.bin",ios::in|ios::binary);
+void afisare_imprum(){
+    impr.open("bazaDeDate/imprumut.bin",ios::in|ios::binary);
     impr.clear();
     impr.seekg(0);  //set pozitie la inceputul fisierului
     while(impr.read((char*)&imprum,sizeof(imprumut)))
         imprum.show_imprumut();
     impr.close();
 }
-int data_pers()
-{
+int data_pers(){
     char studentName[30];
     cout<<"Introdu numele persoanei :";
     cin.get(studentName,30);
@@ -195,8 +185,7 @@ int data_pers()
     impr.close();
     return 1;
 }
-int data_carte()
-{
+int data_carte(){
     char bookName[30];
     cout<<"Introdu numele cartii :";
     cin.get(bookName,30);
@@ -219,84 +208,95 @@ int main()
 {
     initializare();
     sf::Font font;
-    if (!font.loadFromFile("orange juice 2.0.ttf"))
-        return EXIT_FAILURE;
-    sf::Text text("Biblioteca", font, 45);
-    sf::RenderWindow window(sf::VideoMode(640,640),"Library");
-    text.setPosition(window.getSize().y/3,2);
-    text.setColor(sf::Color::Red);
+    font.loadFromFile("fondul.ttf");
 
-    //DEFINE MENU
-    class Meniu menu(window.getSize().x, window.getSize().y);
+    sf::RenderWindow ecran(sf::VideoMode(1000,600),"Biblioteca");
+    sf::Text titlu("Biblioteca", font, 70);
 
-    // run the program as long as the window is open
-    while(window.isOpen())
+    titlu.setPosition(ecran.getSize().x/3,2);
+    titlu.setColor(sf::Color::Red);
+
+    class Meniu meniu(ecran.getSize().x, ecran.getSize().y);
+
+    sf:: Texture imagine;
+    imagine.loadFromFile("download.jpg");
+    sf::Sprite imagineFundal(imagine);
+    imagineFundal.setScale(0.27,0.25);
+
+    sf::Event event;
+    unsigned key =0;
+    while(ecran.isOpen())
     {
-        // check all the window's events that were triggered since the last iteration of the loop
-        sf::Event event;
-        while (window.pollEvent(event))
+        while (ecran.pollEvent(event))
         {
             switch(event.type)
             {
             case sf::Event::Closed:
-                window.close();
+                ecran.close();
                 break;
             case sf::Event::KeyReleased:
                 switch (event.key.code)
                 {
                 case sf::Keyboard::Up:
-                    menu.moveUp();
+                    meniu.moveUp();
                     break;
                 case sf::Keyboard::Down:
-                    menu.moveDown();
+                    meniu.moveDown();
                     break;
                 case sf::Keyboard::Return:
-                {
-                    system("cls");
-                    switch(menu.getPressedItem())
+                    switch(key)
                     {
-                    // aici facem ca optiunile alese sa fie afisate in consola******************
                     case 0:
-                        return 0;
+                        if(key = meniu.elementulSelectat);
+                        else return 0;
+                        meniu.seteazaPozitieDeInitiala();
                         break;
                     case 1:
-                        add_book();
-                        //window.setActive(false);
+                        switch(meniu.elementulSelectat)
+                        {
+                        case 0:add_book();
+                                break;
+                        case 1:afisare_carti();
+                                break;
+                        case 2:data_carte();
+                                break;
+                        }
                         break;
                     case 2:
-                        add_pers();
+                        switch(meniu.elementulSelectat)
+                        {
+                        case 0:add_pers();
+                                break;
+                        case 1:afisare_pers();
+                                break;
+                        case 2:data_pers();
+                                break;
+                        }
                         break;
                     case 3:
-                        afisare_imprum();
-                        break;
-                    case 4:
-                        data_pers();
-                        break;
-                    case 5:
-                        data_carte();
-                        break;
-                    case 6:
-                        imprumut_nou();
-                        break;
-                    case 7:
-                        afisare_carti();
-                        break;
-                    case 8:
-                        afisare_pers();
-                        break;
-                    default:
+                        switch(meniu.elementulSelectat)
+                        {
+                        case 0:imprumut_nou();
+                               break;
+                        case 1:afisare_imprum();
+                                break;
+                        }
                         break;
                     }
                     break;
-                }
+                case sf::Keyboard::BackSpace:
+                    key = 0;
+                    meniu.seteazaPozitieDeInitiala();
+                    break;
                 }
                 break;
             }
         }
-        window.clear();
-        window.draw(text);
-        menu.draw(window);
-        window.display();
+    ecran.clear();
+    ecran.draw(imagineFundal);
+    ecran.draw(titlu);
+    meniu.afiseazaMeniul(ecran,key);
+    ecran.display();
     }
     return 0;
 }
